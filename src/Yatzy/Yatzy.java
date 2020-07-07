@@ -13,13 +13,13 @@ public class Yatzy {
         dice = IntStream.of(d1,d2,d3,d4,d5).toArray();
     }
 
-    /* * Returns the same of all dice * */
+    /* * Returns the sum of all dice * */
     public static int chance(int d1, int d2, int d3, int d4, int d5) {
         return IntStream.of(d1, d2, d3, d4, d5).sum();
     }
 
-    /* * Check if all dice have the same number *
-     * Returns 50 if all dice have the same number or 0 if not. */
+    /* * Check if all dice have the sum number *
+     * Returns 50 if all dice have the sum number or 0 if not. */
     public static int yatzy(int... dice)
     {
         return Arrays.stream(dice).allMatch(die -> die == dice[0]) ? 50 : 0;
@@ -81,7 +81,7 @@ public class Yatzy {
         return maxPair * 2;
     }
 
-    /* Returns the sum of two pairs of dice.*/
+    /* * Returns the sum of two pairs of dice.*/
     public static int two_pair(int d1, int d2, int d3, int d4, int d5) //If the name is composed of several words, the first letter of each word must be in uppercase : twoPair
     {
         List<Integer> diceList = Arrays.asList(d1, d2, d3, d4, d5);
@@ -90,8 +90,7 @@ public class Yatzy {
                 .distinct().reduce(0, Integer::sum);
         return distinctPair * 2;
     }
-
-    /* * Returns the sum of the dice if there are nb die of them with the same number.*/   //REVIEW;
+    /* * If params equal the number of dice that get same results, return the sum of results of these dice.*/
     protected static int numberOfAKind(int d1, int d2, int d3, int d4, int d5, int value) {
         List<Integer> diceList = Arrays.asList(d1, d2, d3, d4, d5);
         Integer maxPair = diceList.stream()
@@ -114,7 +113,7 @@ public class Yatzy {
         return numberOfAKind(d1, d2, d3, d4, d5, 4);
     }
 
-    /* * Check if the dice respect the number sequence 1 2 3 4 5 then returns the sum of the dice.*/
+    /* * Check if the dice respect the number sequence then returns the sum of the dice.*/
     public static int smallStraight(int d1, int d2, int d3, int d4, int d5) {
         int[] tallies = new int[5];
         IntStream.of(d1, d2, d3, d4, d5).forEach(value -> tallies[value - 1]++);
@@ -122,7 +121,7 @@ public class Yatzy {
                 .allMatch(value -> value == 1) ? 15 : 0;
     }
 
-    /* * Check if the dice respect the number sequence 2 3 4 5 6 then returns the sum of the dice.*/
+    /* * Check if the dice respect the number sequence then returns the sum of the dice.*/
     public static int largeStraight(int d1, int d2, int d3, int d4, int d5) {
       int[] tallies = new int[6];
       IntStream.of(d1, d2, d3, d4, d5).forEach(value -> tallies[value - 1]++);
